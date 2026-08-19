@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ERICA 계절학기 종합 안내</title>
+  <style>
+    body { margin: 0; padding: 32px 20px; background: #eef2f7; }
+    @media (max-width: 520px) { body { padding: 0; background: #fff; } }
+  </style>
+</head>
+<body>
+
+<style>
+  /*
+    ERICA 계절학기 종합 안내
+    - 최신 완성형 안내문 HTML의 디자인 구조를 기준으로 작성
+    - 모든 스타일은 #hy-course-guide 내부로 한정
+    - 학교 게시판의 다른 요소와 CSS 충돌을 최소화
+  */
+  #hy-course-guide {
+    --hy-blue: #0b4da2;
+    --hy-blue-dark: #07366f;
+    --hy-blue-soft: #eef5ff;
+    --hy-red: #cf2e2e;
+    --hy-orange: #b75b00;
+    --hy-green: #177245;
+    --hy-text: #202632;
+    --hy-muted: #637083;
+    --hy-line: #dbe3ed;
+    --hy-bg: #f5f7fa;
+    max-width: 1180px;
+    margin: 0 auto;
+    color: var(--hy-text);
+    font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    word-break: keep-all;
+  }
+
+  #hy-course-guide * { box-sizing: border-box; }
+  #hy-course-guide a { color: inherit; }
+  #hy-course-guide .hy-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  #hy-course-guide .hy-hero {
+    padding: 36px 34px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--hy-blue-dark), var(--hy-blue));
+    border-radius: 22px;
+    box-shadow: 0 14px 38px rgba(7, 54, 111, .17);
+  }
+  #hy-course-guide .hy-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-bottom: 12px; padding: 5px 10px;
+    border: 1px solid rgba(255,255,255,.35); border-radius: 999px;
+    background: rgba(255,255,255,.1); font-size: 13px; font-weight: 700;
+  }
+  #hy-course-guide .hy-hero h1 {
+    margin: 0;
+    font-size: clamp(27px, 4vw, 42px);
+    line-height: 1.25;
+  }
+  #hy-course-guide .hy-hero p {
+    margin: 12px 0 0;
+    color: rgba(255,255,255,.88);
+  }
+  #hy-course-guide .hy-actions {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;
+  }
+  #hy-course-guide .hy-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    min-height: 44px; padding: 10px 15px; border-radius: 10px;
+    border: 1px solid transparent; text-decoration: none; font-weight: 750;
+    cursor: pointer; font: inherit;
+  }
+  #hy-course-guide .hy-btn-primary {
+    color: var(--hy-blue-dark); background: #fff;
+  }
+  #hy-course-guide .hy-btn-ghost {
+    color: #fff;
+    border-color: rgba(255,255,255,.45);
+    background: rgba(255,255,255,.08);
+  }
+  #hy-course-guide .hy-doc-actions {
+    margin: 0 0 18px;
+  }
+  #hy-course-guide .hy-doc-actions .hy-btn {
+    color: var(--hy-blue-dark);
+    border-color: #c9d9ed;
+    background: var(--hy-blue-soft);
+    font-weight: 800;
+  }
+  #hy-course-guide .hy-doc-actions .hy-btn:hover,
+  #hy-course-guide .hy-doc-actions .hy-btn:focus {
+    border-color: var(--hy-blue);
+    background: #e3efff;
+  }
+
+  #hy-course-guide .hy-layout {
+    display: grid;
+    grid-template-columns: 255px minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+    margin-top: 22px;
+  }
+
+  #hy-course-guide .hy-nav {
+    position: sticky;
+    top: 18px;
+    max-height: calc(100vh - 36px);
+    max-height: calc(100dvh - 36px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    padding: 13px;
+    border: 1px solid var(--hy-line);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(28, 45, 69, .06);
+  }
+  #hy-course-guide .hy-nav::-webkit-scrollbar {
+    width: 8px;
+  }
+  #hy-course-guide .hy-nav::-webkit-scrollbar-thumb {
+    border: 2px solid #fff;
+    border-radius: 999px;
+    background: #c6d2df;
+  }
+  #hy-course-guide .hy-nav-title {
+    padding: 8px 10px 11px;
+    color: var(--hy-muted);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  #hy-course-guide .hy-nav-search {
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #edf2f7;
+  }
+  #hy-course-guide .hy-nav-search input {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid var(--hy-line);
+    border-radius: 9px;
+    background: #f7f9fc;
+    color: var(--hy-text);
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.4;
+    outline: none;
+  }
+  #hy-course-guide .hy-nav-search input:focus {
+    border-color: var(--hy-blue);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(11, 77, 162, .11);
+  }
+  #hy-course-guide .hy-nav-search-status {
+    min-height: 15px;
+    margin-top: 5px;
+    color: var(--hy-muted);
+    font-size: 11px;
+    line-height: 1.35;
+  }
+  #hy-course-guide mark.hy-search-highlight {
+    padding: 0 .08em;
+    border-radius: 3px;
+    background: #fff176;
+    color: inherit;
+    box-shadow: 0 0 0 1px rgba(183, 91, 0, .16);
+  }
+  #hy-course-guide .hy-nav > a,
+  #hy-course-guide .hy-nav-group > summary {
+    display: block;
+    margin: 2px 0;
+    padding: 9px 32px 9px 10px;
+    border-radius: 9px;
+    color: #415068;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 680;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  #hy-course-guide .hy-nav > a {
+    padding-right: 10px;
+  }
+  #hy-course-guide .hy-nav > a:hover,
+  #hy-course-guide .hy-nav-group > summary:hover {
+    color: var(--hy-blue);
+    background: var(--hy-blue-soft);
+  }
+  #hy-course-guide .hy-nav-group {
+    margin: 2px 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    overflow: visible;
+  }
+  #hy-course-guide .hy-nav-group > summary {
+    position: relative;
+    cursor: pointer;
+    list-style: none;
+  }
+  #hy-course-guide .hy-nav-group > summary::-webkit-details-marker { display: none; }
+  #hy-course-guide .hy-nav-group > summary::after {
+    content: "+";
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    color: #7a8799;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  #hy-course-guide .hy-nav-group[open] > summary::after { content: "−"; }
+  #hy-course-guide .hy-nav-group > summary:hover::after { color: var(--hy-blue); }
+  #hy-course-guide .hy-nav-sub {
+    margin: 3px 0 7px 10px;
+    padding: 3px 0 3px 10px;
+    border-left: 2px solid #d7e5f7;
+  }
+  #hy-course-guide .hy-nav-sub a {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 7px;
+    color: #68758a;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  #hy-course-guide .hy-nav-sub a:hover {
+    color: var(--hy-blue);
+    background: #f4f8fd;
+  }
+
+  #hy-course-guide .hy-content { min-width: 0; }
+  #hy-course-guide .hy-section {
+    scroll-margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 26px;
+    border: 1px solid var(--hy-line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(27, 46, 73, .045);
+  }
+  #hy-course-guide .hy-section-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  #hy-course-guide .hy-section h2 {
+    margin: 0;
+    font-size: 23px;
+    line-height: 1.35;
+  }
+  #hy-course-guide .hy-kicker {
+    margin-bottom: 3px;
+    color: var(--hy-blue);
+    font-size: 13px;
+    font-weight: 850;
+    letter-spacing: .04em;
+  }
+  #hy-course-guide .hy-section-desc {
+    margin: 5px 0 0;
+    color: var(--hy-muted);
+    font-size: 14px;
+  }
+  #hy-course-guide .hy-danger-text {
+    margin: 4px 0 18px;
+    color: var(--hy-red);
+    font-size: 14px;
+    font-weight: 750;
+  }
+  #hy-course-guide .hy-text-center {
+    text-align: center;
+  }
+
+  #hy-course-guide .hy-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  #hy-course-guide .hy-card {
+    min-width: 0;
+    padding: 15px;
+    border: 1px solid var(--hy-line);
+    border-radius: 14px;
+    background: var(--hy-bg);
+  }
+  #hy-course-guide .hy-card-label {
+    color: var(--hy-blue);
+    font-size: 13px;
+    font-weight: 850;
+  }
+  #hy-course-guide .hy-card-date {
+    max-width: 100%;
+    margin-top: 4px;
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 850;
+    white-space: normal;
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  #hy-course-guide .hy-card-note {
+    margin-top: 3px;
+    color: var(--hy-muted);
+    font-size: 13px;
+  }
+
+  #hy-course-guide .hy-notice {
+    margin: 12px 0;
+    padding: 15px 16px;
+    border-left: 5px solid var(--hy-blue);
+    border-radius: 8px;
+    background: var(--hy-blue-soft);
+  }
+  #hy-course-guide .hy-notice strong {
+    display: block;
+    margin-bottom: 3px;
+  }
+  #hy-course-guide .hy-notice-danger {
+    border-left-color: var(--hy-red);
+    background: #fff1f1;
+  }
+  #hy-course-guide .hy-notice-warning {
+    border-left-color: var(--hy-orange);
+    background: #fff7eb;
+  }
+
+  #hy-course-guide .hy-accordion {
+    scroll-margin-top: 80px;
+    margin: 10px 0;
+    border: 1px solid var(--hy-line);
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  #hy-course-guide .hy-accordion > summary {
+    position: relative;
+    padding: 15px 46px 15px 16px;
+    cursor: pointer;
+    font-weight: 780;
+    list-style: none;
+  }
+  #hy-course-guide .hy-accordion > summary::-webkit-details-marker { display: none; }
+  #hy-course-guide .hy-accordion > summary::after {
+    content: "+";
+    position: absolute;
+    right: 17px;
+    top: 12px;
+    color: var(--hy-blue);
+    font-size: 22px;
+    font-weight: 500;
+  }
+  #hy-course-guide .hy-accordion[open] > summary::after { content: "−"; }
+  #hy-course-guide .hy-department-accordion > summary {
+    padding-left: 46px;
+    text-align: center;
+  }
+  #hy-course-guide .hy-detail-body {
+    padding: 0 16px 16px;
+    color: #48566b;
+  }
+  #hy-course-guide .hy-detail-body p { margin: 0; }
+  #hy-course-guide .hy-detail-body ul {
+    margin: 5px 0 0;
+    padding-left: 21px;
+  }
+  #hy-course-guide .hy-detail-body ol {
+    margin: 5px 0 0;
+    padding-left: 21px;
+  }
+  #hy-course-guide .hy-placeholder {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 9px;
+    color: #69758a;
+    background: #f7f9fc;
+    font-size: 14px;
+  }
+
+  #hy-course-guide .hy-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--hy-line);
+    border-radius: 12px;
+  }
+  #hy-course-guide table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+  }
+  #hy-course-guide .hy-table-wide {
+    min-width: 960px;
+  }
+  #hy-course-guide th,
+  #hy-course-guide td {
+    padding: 12px 13px;
+    border-bottom: 1px solid var(--hy-line);
+    text-align: left;
+    font-size: 14px;
+  }
+  #hy-course-guide th {
+    color: #344156;
+    background: #f2f5f9;
+  }
+  #hy-course-guide .hy-table-center th,
+  #hy-course-guide .hy-table-center td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  #hy-course-guide .hy-table-accent {
+    color: var(--hy-blue-dark);
+    font-weight: 850;
+  }
+  #hy-course-guide .hy-table-blue-head thead th {
+    color: #fff;
+    background: var(--hy-blue);
+  }
+  #hy-course-guide .hy-curriculum-table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+  #hy-course-guide .hy-curriculum-table .hy-col-course { width: 15%; }
+  #hy-course-guide .hy-curriculum-table .hy-col-grade { width: 6%; }
+  #hy-course-guide .hy-curriculum-table .hy-col-year { width: 5.2%; }
+  #hy-course-guide .hy-curriculum-table .hy-col-note { width: 11.4%; }
+  #hy-course-guide .hy-curriculum-table th,
+  #hy-course-guide .hy-curriculum-table td {
+    padding: 6px 3px;
+    border: 1px solid var(--hy-line);
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  #hy-course-guide .hy-curriculum-table .hy-year-cell {
+    font-size: 10px;
+  }
+  #hy-course-guide .hy-curriculum-past {
+    background: repeating-linear-gradient(45deg, #eef1f5 0, #eef1f5 2px, #fff 2px, #fff 5px);
+  }
+  #hy-course-guide .hy-curriculum-active {
+    background: #c8cdd4;
+  }
+  #hy-course-guide .hy-curriculum-close {
+    background: repeating-linear-gradient(90deg, #adb5bf 0, #adb5bf 2px, #d6dbe1 2px, #d6dbe1 5px);
+  }
+  #hy-course-guide .hy-curriculum-current {
+    border-left: 3px solid #202632 !important;
+    border-right: 3px solid #202632 !important;
+    background: #c8cdd4;
+    color: var(--hy-blue-dark);
+    font-weight: 850;
+  }
+  #hy-course-guide .hy-curriculum-current-start {
+    border-top: 3px solid #202632 !important;
+  }
+  #hy-course-guide .hy-curriculum-current-end {
+    border-bottom: 3px solid #202632 !important;
+  }
+  #hy-course-guide tr:last-child td { border-bottom: 0; }
+
+  #hy-course-guide .hy-backtop {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--hy-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  @media (max-width: 860px) {
+    #hy-course-guide { word-break: normal; }
+    #hy-course-guide .hy-hero {
+      padding: 27px 21px;
+      border-radius: 16px;
+    }
+    #hy-course-guide .hy-layout { display: block; }
+    #hy-course-guide .hy-nav {
+      position: relative;
+      top: auto;
+      z-index: 10;
+      max-height: 62vh;
+      max-height: 62dvh;
+      margin-bottom: 16px;
+      padding: 10px;
+      border-radius: 14px;
+    }
+    #hy-course-guide .hy-nav-title { display: block; }
+    #hy-course-guide .hy-section {
+      padding: 21px 17px;
+      border-radius: 14px;
+      scroll-margin-top: 20px;
+    }
+    #hy-course-guide .hy-cards { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 520px) {
+    #hy-course-guide .hy-actions { display: grid; }
+    #hy-course-guide .hy-btn { width: 100%; }
+    #hy-course-guide .hy-section-head { display: block; }
+  }
+</style>
+
+<div id="hy-course-guide">
+  <div id="hy-top" class="hy-sr-only">안내문 시작</div>
+
+  <!-- 01. 상단 제목 및 빠른 이동 버튼 -->
+  <header class="hy-hero">
+    <div class="hy-eyebrow">한양대학교 ERICA 교육혁신처 학사운영팀</div>
+    <h1>ERICA 계절학기 종합 안내</h1>
+    <p>계절학기 수강신청부터 등록, 수업, 취소·환불, 강의평가 및 성적처리까지 반드시 확인해야 할 사항을 안내합니다.</p>
+    <div class="hy-actions">
+      <a class="hy-btn hy-btn-primary" href="#hy-schedule">주요 일정 확인</a>
+      <a class="hy-btn hy-btn-ghost" href="#hy-application">수강신청 안내</a>
+      <a class="hy-btn hy-btn-ghost" href="#hy-refund">취소·환불 안내</a>
+    </div>
+  </header>
+
+  <div class="hy-notice">
+    <strong>반드시 확인하세요</strong>
+    계절학기는 전면 대면수업을 원칙으로 운영되며, 학사운영과 학점취득 기준은 정규학기와 동일하게 엄격하게 적용됩니다. 실제 일정과 금액은 해당 학기 공지를 확인하시기 바랍니다.
+  </div>
+
+  <div class="hy-layout">
+    <nav class="hy-nav" aria-label="안내문 목차">
+      <div class="hy-nav-title">안내 메뉴</div>
+      <div class="hy-nav-search">
+        <label class="hy-sr-only" for="hy-nav-search-input">안내 메뉴 검색</label>
+        <input id="hy-nav-search-input" type="search" placeholder="검색" autocomplete="off">
+        <div class="hy-nav-search-status" aria-live="polite"></div>
+      </div>
+
+      <a href="#hy-overview">1. 핵심 안내</a>
+      <a href="#hy-schedule">2. 주요 일정</a>
+      <a href="#hy-eligibility">3. 수강 대상</a>
+      <details class="hy-nav-group">
+        <summary>4. 수강신청 안내</summary>
+        <div class="hy-nav-sub">
+          <a href="#hy-application-method">1) 신청 방법</a>
+          <a href="#hy-class-credits">2) 수업시간·학점</a>
+          <a href="#hy-application-notes">3) 신청 유의사항</a>
+        </div>
+      </details>
+      <a href="#hy-registration">5. 등록·고지서</a>
+      <details class="hy-nav-group">
+        <summary>6. 수강취소·환불</summary>
+        <div class="hy-nav-sub">
+          <a href="#hy-refund-before">1) 개강 전 취소</a>
+          <a href="#hy-refund-after">2) 개강 후 부분환불</a>
+          <a href="#hy-refund-standard">3) 환불 기준</a>
+        </div>
+      </details>
+      <a href="#hy-evaluation">7. 강의평가</a>
+      <a href="#hy-grades">8. 성적처리</a>
+      <a href="#hy-contact">9. 문의·참고</a>
+    </nav>
+
+    <main class="hy-content">
+      <!-- 1. 핵심 안내 -->
+      <section id="hy-overview" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">01 · OVERVIEW</div>
+            <h2>핵심 안내</h2>
+            <p class="hy-section-desc">수강신청 전에 아래 운영 원칙과 본인의 수강 가능 여부를 먼저 확인하시기 바랍니다.</p>
+          </div>
+        </div>
+
+        <div class="hy-cards">
+          <div class="hy-card">
+            <div class="hy-card-label">수업 방식</div>
+            <div class="hy-card-date">전면 대면수업 원칙</div>
+            <div class="hy-card-note">교과목 특성에 따른 별도 운영 여부는 수강편람에서 확인</div>
+          </div>
+          <div class="hy-card">
+            <div class="hy-card-label">수업일수</div>
+            <div class="hy-card-date">총 15일</div>
+            <div class="hy-card-note">학점별 수업시간을 충족하여 운영</div>
+          </div>
+          <div class="hy-card">
+            <div class="hy-card-label">신청 한도</div>
+            <div class="hy-card-date">최대 3과목·9학점</div>
+            <div class="hy-card-note">사회봉사과목은 과목 수와 최대학점에서 제외</div>
+          </div>
+        </div>
+
+        <div class="hy-notice">
+          <strong>이수구분 확인 책임</strong>
+          계절학기 과목은 전 대학 학생을 대상으로 개설되어 수강편람의 이수구분과 본인의 실제 이수구분이 다를 수 있습니다. 수강신청 후 반드시 수강신청 사이트의 ‘신청내역’과 HY-in의 ‘졸업사정조회’에서 이수구분을 확인해야 하며, 미확인에 따른 책임은 본인에게 있습니다.
+        </div>
+        <div class="hy-notice hy-notice-danger">
+          <strong>중도 수강포기 제한</strong>
+          계절학기는 종강일까지 수강 가능한 경우에만 신청해야 합니다. 개강 후에는 규정에서 정한 불가피한 사유 외에는 수강취소 및 환불이 불가능합니다.
+        </div>
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 2. 주요 일정 -->
+      <section id="hy-schedule" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">02 · SCHEDULE</div>
+            <h2>주요 일정</h2>
+            <p class="hy-section-desc">정확한 날짜와 시간은 매 계절학기 공지에서 확인하세요. 아래 순서는 일반적인 진행 흐름입니다.</p>
+            <div class="hy-danger-text">
+              <div>* 일정은 학사 운영 사정에 따라 변경될 수 있습니다.</div>
+              <div>* 각 단계의 마감 이후에는 신청·정정·납부가 제한됩니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hy-table-wrap">
+          <table class="hy-table-center">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>대상·내용</th>
+                <th>확인 시점</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>수요조사</td><td>계절학기 개설 희망 과목 조사</td><td>수강신청 전</td><td>참여자 우선권 기준 확인</td>
+              </tr>
+              <tr>
+                <td>강의시간표 공개</td><td>수강편람 오픈</td><td>수강신청 전</td><td>개설과목·수업방식 확인</td>
+              </tr>
+              <tr>
+                <td>우선 수강신청</td><td>수요조사 참여자</td><td>1차 신청 전</td><td>해당 기간에만 우선권 부여</td>
+              </tr>
+              <tr><td>전체 수강신청</td><td>전체 학생·학점교류생</td><td>1차 신청</td><td>대상별 제한 확인</td></tr>
+              <tr><td>2차 신청·정정</td><td>신규 신청, 정정, 캠퍼스 교차수강</td><td>1차 신청 후</td><td>이후 일반 정정 불가</td></tr>
+              <tr><td>폐강·증원 공지</td><td>신청인원 기준 검토</td><td>2차 정정 후</td><td>공지 일정 변경 가능</td></tr>
+              <tr><td>수강료 납부</td><td>1·2차 신청자</td><td>등록기간</td><td class="hy-table-accent">미납 시 자동 취소</td></tr>
+              <tr><td>잔여석 신청·납부</td><td>신규 또는 추가 신청 가능자</td><td>1차 등록 후</td><td>기존 신청 변경·취소 불가</td></tr>
+              <tr><td>졸업예정자·학업연장자 신청</td><td>잔여석에 한함</td><td>잔여석 신청 후</td><td>납부는 별도 안내</td></tr>
+              <tr><td>개강 전 취소·환불</td><td>납부 완료자</td><td>개강 전 지정기간</td><td>E-러닝 타입C 제외</td></tr>
+              <tr><td>강의실 확정</td><td>수강생</td><td>개강 전</td><td>최종 강의실 확인</td></tr>
+              <tr><td>계절학기 수업</td><td>수강생</td><td>15일간 운영</td><td>종강일까지 출석 가능 여부 확인</td></tr>
+              <tr><td>강의평가</td><td>수강생</td><td>수업 종료 전후</td><td>미평가 시 인터넷 성적열람 제한</td></tr>
+              <tr><td>성적 열람·이의신청·정정</td><td>수강생</td><td>종강 후</td><td>성적증명서 출력일 별도 공지</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hy-notice hy-notice-warning">
+          <strong>마감시간 유의</strong>
+          납부 및 신청은 해당 학기 공지의 날짜와 업무시간을 기준으로 합니다. 마감 이후에는 전산 오류나 은행 사정 등의 사유로도 구제되지 않을 수 있으므로 여유 있게 처리하시기 바랍니다.
+        </div>
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 3. 수강 대상 -->
+      <section id="hy-eligibility" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">03 · ELIGIBILITY</div><h2>수강 대상</h2>
+            <p class="hy-section-desc">학적 상태와 교과목별 제한을 함께 확인하세요.</p>
+          </div>
+        </div>
+
+        <details class="hy-accordion" open><summary>재학생</summary>
+          <div class="hy-detail-body">
+            <ul><li>신규 학점 취득 희망자, F학점 재수강자, 성적상승 재수강자가 신청할 수 있습니다.</li><li>현재 정규학기에 수강 중인 동일 과목은 원칙적으로 신청할 수 없습니다. 다만 해당 계절학기 직후 졸업예정자는 예외적으로 신청 가능할 수 있으며, 정규학기 성적 확정 후 재수강 불가 성적으로 판정되면 학사운영팀이 신청을 취소하고 부분환불할 수 있습니다.</li><li>졸업예정자·학업연장자는 사회봉사, 국제여름·겨울학교 등 개설·종료기간이 다른 강좌를 수강할 수 없으므로 해당 학기 기준을 확인해야 합니다.</li></ul>
+          </div>
+        </details>
+        <details class="hy-accordion"><summary>휴학생</summary><div class="hy-detail-body"><ul><li>휴학생도 수강할 수 있습니다.</li><li>계절학기로 졸업요건을 충족하더라도 휴학 중 졸업은 불가하며, 복학 후 정규학기를 등록해야 졸업할 수 있습니다.</li><li>근신 이외의 징계처분을 받은 경우 수강신청이 불가합니다.</li></ul></div></details>
+        <details class="hy-accordion"><summary>졸업유보생</summary><div class="hy-detail-body"><ul><li>수강신청 ‘유’: 신청 가능하나 정규학기와 마찬가지로 재수강은 불가합니다.</li><li>수강신청 ‘무’: 계절학기 수강신청이 불가합니다.</li></ul></div></details>
+
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 4. 수강신청 안내 -->
+      <section id="hy-application" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">04 · APPLICATION</div><h2>수강신청 안내</h2>
+            <p class="hy-section-desc">접속 방법, 수업시간·학점 및 신청 단계별 제한을 확인하세요.</p>
+          </div>
+        </div>
+
+        <details id="hy-application-method" class="hy-accordion" open><summary>1) 신청 방법</summary><div class="hy-detail-body"><ol><li>HY-in 로그인 첫 화면의 ‘수강신청 바로가기’를 선택하거나, 한양대학교 홈페이지 하단의 사이트 바로가기에서 ‘수강신청시스템(수강편람)’을 선택합니다.</li><li>수강신청시스템 우측 상단에서 로그인한 후 [수강신청] 메뉴를 선택합니다.</li><li>해당 계절학기를 설정하고 조회하거나 학수번호·교과목명으로 검색합니다.</li><li>과목 좌측의 수강신청 버튼을 선택합니다.</li><li>[신청내역] 및 [신청과목시간표]에서 신청 결과를 확인하고, HY-in [졸업사정조회]에서 이수구분을 재확인합니다.</li></ol></div></details>
+        <details id="hy-class-credits" class="hy-accordion"><summary>2) 수업시간 및 신청 가능 학점</summary><div class="hy-detail-body"><div class="hy-table-wrap"><table><thead><tr><th>학점</th><th>1일 수업시간</th><th>총 수업시간</th></tr></thead><tbody><tr><td>3학점</td><td>3시간(오전 또는 오후)</td><td>45시간</td></tr><tr><td>2학점</td><td>2시간(오전 또는 오후)</td><td>30시간</td></tr></tbody></table></div><ul><li>계약학과·사업단 교과목 등은 과목 특성에 따라 수업시간이 다를 수 있습니다.</li><li>1인당 최대 3과목, 9학점까지 신청할 수 있습니다.</li><li>E-러닝 타입A/B/C(학점인정 컨소시엄 강좌)는 1과목만 신청할 수 있으며 타대학 학점교류생은 신청할 수 없습니다.</li><li>사이버토익 및 교내 E-러닝 과목은 E-러닝 타입A/C 1과목과 병행할 수 있습니다.</li><li>사회봉사과목은 최대 과목 수와 학점에서 제외됩니다.</li></ul></div></details>
+        <details id="hy-application-notes" class="hy-accordion"><summary>3) 수강신청 유의사항</summary><div class="hy-detail-body"><ul><li>수요조사 참여자 우선권은 해당 기간에만 적용됩니다. 수요조사 인원이 20명 이상이고 과목이 개설되면 해당 과목에, 20명 이상이지만 미개설되면 동일 학점 과목에 우선권이 부여됩니다. 20명 미만이며 미개설된 경우에는 우선권이 없습니다. 참여 과목도 개설 여부와 정원에 따라 신청하지 못할 수 있습니다.</li><li>타대학 학점교류생은 E-러닝 과목 및 서울캠퍼스 교차수강이 불가합니다.</li><li>서울캠퍼스 핵심교양은 교양선택, 그 외 교양과목은 타전공 일반선택으로 이수될 수 있습니다.</li><li>2차 정정 후 신청인원이 기준 미만인 과목은 폐강됩니다. 일반 기준은 20명 미만, 전공은 15명 미만이며 E-러닝 타입C는 컨소시엄 전체 인원에 따라 결정됩니다.</li><li>E-러닝 타입C는 일반 교과목과 수강기간이 다르며, 2차 정정 이후 취소·환불이 불가하므로 대학 e-러닝 기반 학점인정 컨소시엄 LMS의 학사일정을 확인해야 합니다.</li><li>재수강은 원칙적으로 학수번호가 동일한 과목을 신청해야 하며, 성적상승 재수강 안내와 대치·동일과목 목록을 확인해야 합니다.</li><li>잔여석 신청에서는 납부 완료 과목의 변경·취소 및 동일과목의 다른 시간대로 변경이 불가합니다. 신규 신청자 또는 다른 시간대에 과목을 추가할 수 있는 학생만 신청할 수 있습니다.</li><li>수강취소 내역은 수강매매 방지를 위해 여석에 즉시 반영되지 않을 수 있습니다.</li></ul><div class="hy-notice hy-notice-danger"><strong>이수구분 미확인에 따른 변경 불가</strong>이수구분을 확인하지 않아 발생한 수강취소·변경 요청은 인정되지 않습니다. 다중전공·부전공 인정 여부는 해당 학과에 문의하세요.</div></div></details>
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 5. 등록 및 고지서 출력 -->
+      <section id="hy-registration" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">05 · REGISTRATION</div><h2>등록 및 고지서 출력</h2>
+            <p class="hy-section-desc">수강신청 차수에 맞는 납부기간과 고지서를 확인하세요.</p>
+          </div>
+        </div>
+
+        <ul><li>1·2차 수강신청자와 잔여석 수강신청자의 납부기간이 다르므로 본인에게 해당하는 기간을 확인해야 합니다.</li><li>고지서는 수강신청시스템 로그인 → [신청내역] → [신청과목시간표확인(고지서출력)]에서 등록기간에만 출력할 수 있습니다.</li><li>인터넷뱅킹, 폰뱅킹 및 고지서 납부가 가능하며 신용카드·분할 납부는 불가합니다.</li><li>수강료는 학점당 부과되며 일반학생과 해외대학 교류학생의 금액이 다를 수 있으므로 해당 학기 공지를 확인하세요.</li><li>납부 확인증은 HY-in → 증명발급 → 포털증명 발급에서 납부 다음 날부터 출력할 수 있습니다.</li></ul>
+        <div class="hy-notice hy-notice-warning"><strong>일부 과목만 취소하려는 경우</strong>납부기간 중 과목별 분납은 불가합니다. 전체 금액 납부 후 개강 전 환불기간에 과목별 취소하거나, 전체 미납 후 잔여석 기간에 새로 신청할 수 있으나 기존 과목을 다시 신청하지 못할 수 있습니다.</div>
+        <div class="hy-notice hy-notice-danger"><strong>미납 시 자동 취소</strong>납부기간을 벗어나면 수강신청이 자동 취소되며, 은행 업무시간이나 전산 오류 등의 사유로도 구제되지 않습니다.</div>
+
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 6. 수강 취소 및 환불 -->
+      <section id="hy-refund" class="hy-section">
+        <div class="hy-section-head">
+          <div>
+            <div class="hy-kicker">06 · REFUND</div><h2>수강 취소 및 환불</h2>
+            <p class="hy-section-desc">개강 전과 개강 후의 신청 조건 및 환불액이 다릅니다.</p>
+          </div>
+        </div>
+
+        <details id="hy-refund-before" class="hy-accordion" open><summary>1) 개강 전 수강취소 및 전액환불</summary><div class="hy-detail-body"><ul><li>지정된 개강 전 취소기간에 납부한 강좌를 취소하면 전액 환불됩니다.</li><li>E-러닝 타입C 과목은 개강 전 취소 및 환불이 불가합니다.</li><li>수강신청시스템 → [신청내역]에서 과목 앞 ‘환불’ 아이콘을 선택하고 취소 강좌, 환불액, 환불계좌를 확인한 후 저장합니다.</li><li>취소·환불 신청한 과목은 되돌릴 수 없습니다.</li><li>환불금은 신청자 취합 후 일괄 입금되며 처리 시점은 해당 학기 공지를 확인하세요.</li></ul></div></details>
+        <details id="hy-refund-after" class="hy-accordion"><summary>2) 개강 후 부분환불</summary><div class="hy-detail-body"><div class="hy-notice hy-notice-danger"><strong>허용 사유 외 취소 불가</strong>질병으로 인한 입원, 취업, 인턴십, 군입대, 직계가족·형제자매 사망 등 규정상 사유와 증빙이 있는 경우에만 신청할 수 있습니다. 취업 사유의 학적·졸업예정 조건은 해당 학기 공지를 따르며, 입원·채용·병역기간 등은 수업일 중 최소 5일을 포함해야 합니다.</div><ul><li>여러 과목 중 일부 과목만 취소할 수 없으며 전체 수강취소만 가능합니다.</li><li>학사운영팀에 먼저 유선 연락한 뒤 환불신청서와 진단서, 합격통지서, 입영통지서, 가족관계증명서·사망증명서 등 해당 증빙을 제출합니다.</li><li>담당 부서 업무시간 내에만 신청할 수 있으며, 제출 시점을 기준으로 환불단계가 적용됩니다.</li><li>학점교류생과 해외대학생은 개강 후 환불이 불가합니다.</li></ul></div></details>
+        <details id="hy-refund-standard" class="hy-accordion"><summary>3) 개강 후 환불 기준</summary><div class="hy-detail-body"><div class="hy-table-wrap"><table class="hy-table-center"><thead><tr><th>신청 시점</th><th>반환 기준</th></tr></thead><tbody><tr><td>총 수업일의 1/4 경과 전(수업 3일차까지)</td><td>학점당 수강료의 5/6</td></tr><tr><td>총 수업일의 1/4 경과 후, 1/2 경과 전(수업 4~7일차)</td><td>학점당 수강료의 2/3</td></tr><tr><td>총 수업일의 1/2 경과 후, 3/4 경과 전(수업 8~11일차)</td><td>학점당 수강료의 1/2</td></tr><tr><td>총 수업일의 3/4 경과 이후</td><td>취소 및 환불 불가</td></tr></tbody></table></div><p>E-러닝 타입C도 해당 강좌의 개강일을 기준으로 규정상 사유가 있는 개강 후 부분환불만 가능하며 같은 단계별 기준을 적용합니다.</p></div></details>
+        <a class="hy-backtop" href="#hy-top">맨 위로 ↑</a>
+      </section>
+
+      <!-- 7. 강의평가 -->
+      <section id="hy-evaluation" class="hy-section"><div class="hy-section-head"><div><div class="hy-kicker">07 · EVALUATION</div><h2>강의평가</h2><p class="hy-section-desc">지정 기간에 수강한 모든 과목의 강의평가를 완료하세요.</p></div></div><ol><li>HY-in → 학생학사정보 로그인</li><li>내강의실(수업홈) → 강의평가 입력</li></ol><div class="hy-notice hy-notice-warning"><strong>성적열람 제한</strong>강의평가를 하지 않으면 인터넷 성적열람이 불가합니다. 평가 완료 후 한 과목이라도 성적을 열람하면 본인의 평가 내용을 수정할 수 없습니다.</div><a class="hy-backtop" href="#hy-top">맨 위로 ↑</a></section>
+
+      <!-- 8. 성적처리 -->
+      <section id="hy-grades" class="hy-section"><div class="hy-section-head"><div><div class="hy-kicker">08 · GRADES</div><h2>성적처리</h2><p class="hy-section-desc">성적 열람·정정 및 학점 반영 기준을 안내합니다.</p></div></div><ul><li>성적 열람, 이의신청, 정정 및 성적증명서 출력 일정은 해당 학기 공지를 확인하세요.</li><li>정규학기와 동일한 성적평가 방법을 적용합니다.</li><li>E-러닝 타입C는 수업 관장대학의 평가방식으로 평가한 뒤 우리 대학 성적 적용 시 절대평가로 부여됩니다.</li><li>취득 성적은 수료, 학사경고, 유급, 장학생 선발 등 해당 정규학기 성적과 무관하며 졸업 이수학점으로 인정됩니다.</li><li>취득 학점은 성적표의 계절학기란에 별도로 표기되며 전체 학점 및 평점 계산에 포함됩니다.</li></ul><a class="hy-backtop" href="#hy-top">맨 위로 ↑</a></section>
+
+      <!-- 9. 문의 및 참고 -->
+      <section id="hy-contact" class="hy-section"><div class="hy-section-head"><div><div class="hy-kicker">09 · CONTACT</div><h2>문의 및 참고</h2><p class="hy-section-desc">세부 기준은 해당 학기 공지와 담당 기관의 최신 안내를 우선 적용합니다.</p></div></div><div class="hy-table-wrap"><table><thead><tr><th>구분</th><th>담당</th><th>연락처·확인처</th></tr></thead><tbody><tr><td>계절학기 학사운영</td><td>ERICA 교육혁신처 학사운영팀</td><td>031-400-4219 / tdt1234@hanyang.ac.kr</td></tr><tr><td>사회봉사</td><td>사회봉사단</td><td>031-400-4342 / 사회봉사단 홈페이지 공지</td></tr><tr><td>국제여름·겨울학교</td><td>국제팀</td><td>031-400-4931</td></tr><tr><td>E-러닝 타입C</td><td>대학 e-러닝 기반 학점인정 컨소시엄</td><td><a href="http://selc.or.kr" target="_blank" rel="noopener">컨소시엄 LMS</a> → 수강안내 → 학사일정</td></tr></tbody></table></div><div class="hy-notice"><strong>최신 공지 우선</strong>학기별 일정, 수강료, 대상자 세부 조건, 개설과목, 강의실 및 담당 부서 연락처는 변경될 수 있으므로 실제 신청 전 최신 공지를 반드시 확인하세요.</div><a class="hy-backtop" href="#hy-top">맨 위로 ↑</a></section>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('hy-course-guide');
+  if (!root) return;
+
+  /* 안내 메뉴 키워드 검색 */
+  var nav = root.querySelector('.hy-nav');
+  var content = root.querySelector('.hy-content');
+  var searchInput = root.querySelector('#hy-nav-search-input');
+  var searchStatus = root.querySelector('.hy-nav-search-status');
+  var navTopLinks = nav ? Array.prototype.filter.call(nav.children, function (item) {
+    return item.tagName && item.tagName.toLowerCase() === 'a';
+  }) : [];
+  var navGroups = nav ? Array.prototype.slice.call(nav.querySelectorAll('.hy-nav-group')) : [];
+
+  navGroups.forEach(function (group) {
+    group.setAttribute('data-hy-initial-open', group.open ? '1' : '0');
+  });
+
+  function refreshNavScroll() {
+    if (!nav) return;
+
+    window.requestAnimationFrame(function () {
+      var maxScrollTop = Math.max(0, nav.scrollHeight - nav.clientHeight);
+      if (nav.scrollTop > maxScrollTop) nav.scrollTop = maxScrollTop;
+    });
+  }
+
+  function keepNavGroupInView(group) {
+    if (!nav || !group || !group.open) return;
+
+    window.requestAnimationFrame(function () {
+      var navRect = nav.getBoundingClientRect();
+      var navStyle = window.getComputedStyle(nav);
+      var paddingTop = parseFloat(navStyle.paddingTop) || 0;
+      var paddingBottom = parseFloat(navStyle.paddingBottom) || 0;
+      var visibleTop = navRect.top + paddingTop;
+      var visibleBottom = navRect.bottom - paddingBottom;
+      var groupRect = group.getBoundingClientRect();
+      var summary = group.querySelector('summary');
+      var summaryRect = summary ? summary.getBoundingClientRect() : groupRect;
+
+      if (groupRect.height > visibleBottom - visibleTop) {
+        if (summaryRect.top < visibleTop || summaryRect.bottom > visibleBottom) {
+          nav.scrollTop += summaryRect.top - visibleTop;
+        }
+        return;
+      }
+
+      if (groupRect.top < visibleTop) {
+        nav.scrollTop -= visibleTop - groupRect.top;
+      } else if (groupRect.bottom > visibleBottom) {
+        nav.scrollTop += groupRect.bottom - visibleBottom + 8;
+      }
+    });
+  }
+
+  navGroups.forEach(function (group) {
+    group.addEventListener('toggle', function () {
+      keepNavGroupInView(group);
+    });
+  });
+
+  function normalizeKeyword(text) {
+    return (text || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+
+  function getTargetText(link) {
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return '';
+    var target = root.querySelector(href);
+    return target ? target.textContent : '';
+  }
+
+  function getSearchText(link) {
+    if (typeof link._hySearchText === 'string') return link._hySearchText;
+    link._hySearchText = normalizeKeyword(link.textContent + ' ' + getTargetText(link));
+    return link._hySearchText;
+  }
+
+  function clearSearchHighlights() {
+    if (!content) return;
+
+    var highlights = Array.prototype.slice.call(content.querySelectorAll('mark.hy-search-highlight'));
+    highlights.forEach(function (mark) {
+      var parent = mark.parentNode;
+      if (!parent) return;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
+
+    Array.prototype.slice.call(content.querySelectorAll('details[data-hy-highlight-opened="1"]')).forEach(function (details) {
+      details.open = false;
+      details.removeAttribute('data-hy-highlight-opened');
+    });
+  }
+
+  function highlightTextNode(textNode, keyword) {
+    var text = textNode.nodeValue;
+    var lowerText = text.toLowerCase();
+    var lowerKeyword = keyword.toLowerCase();
+    var keywordLength = keyword.length;
+    var index = lowerText.indexOf(lowerKeyword);
+    var lastIndex = 0;
+    var count = 0;
+    var fragment = document.createDocumentFragment();
+
+    while (index > -1) {
+      if (index > lastIndex) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex, index)));
+      }
+
+      var mark = document.createElement('mark');
+      mark.className = 'hy-search-highlight';
+      mark.textContent = text.slice(index, index + keywordLength);
+      fragment.appendChild(mark);
+
+      count += 1;
+      lastIndex = index + keywordLength;
+      index = lowerText.indexOf(lowerKeyword, lastIndex);
+    }
+
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+
+    textNode.parentNode.replaceChild(fragment, textNode);
+    return count;
+  }
+
+  function setSearchHighlights(keyword) {
+    clearSearchHighlights();
+    if (!content || !keyword) return 0;
+
+    var nodes = [];
+    var walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        var parent = node.parentNode;
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (parent && parent.closest && parent.closest('mark.hy-search-highlight')) return NodeFilter.FILTER_REJECT;
+        return node.nodeValue.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_REJECT;
+      }
+    });
+    var node;
+    var highlightCount = 0;
+
+    while ((node = walker.nextNode())) {
+      nodes.push(node);
+    }
+
+    nodes.forEach(function (textNode) {
+      highlightCount += highlightTextNode(textNode, keyword);
+    });
+
+    Array.prototype.slice.call(content.querySelectorAll('mark.hy-search-highlight')).forEach(function (mark) {
+      var details = mark.closest ? mark.closest('details.hy-accordion') : null;
+      if (details && !details.open) {
+        details.open = true;
+        details.setAttribute('data-hy-highlight-opened', '1');
+      }
+    });
+
+    return highlightCount;
+  }
+
+  function setNavSearchResult() {
+    if (!searchInput || !nav) return;
+
+    var keyword = normalizeKeyword(searchInput.value);
+    var resultCount = 0;
+    var highlightCount = setSearchHighlights(keyword);
+
+    navTopLinks.forEach(function (link) {
+      var matched = !keyword || getSearchText(link).indexOf(keyword) > -1;
+      link.style.display = matched ? '' : 'none';
+      if (keyword && matched) resultCount += 1;
+    });
+
+    navGroups.forEach(function (group) {
+      var summary = group.querySelector('summary');
+      var subLinksInGroup = Array.prototype.slice.call(group.querySelectorAll('.hy-nav-sub a'));
+      var summaryMatched = summary && normalizeKeyword(summary.textContent).indexOf(keyword) > -1;
+      var subMatchedCount = 0;
+
+      subLinksInGroup.forEach(function (link) {
+        var matched = !keyword || summaryMatched || getSearchText(link).indexOf(keyword) > -1;
+        link.style.display = matched ? '' : 'none';
+        if (keyword && matched) subMatchedCount += 1;
+      });
+
+      var groupMatched = !keyword || summaryMatched || subMatchedCount > 0;
+      group.style.display = groupMatched ? '' : 'none';
+
+      if (keyword && groupMatched) {
+        group.open = true;
+        group.setAttribute('data-hy-search-opened', '1');
+        if (summaryMatched && subMatchedCount === 0) resultCount += 1;
+        else resultCount += subMatchedCount;
+      } else if (!keyword && group.getAttribute('data-hy-search-opened') === '1') {
+        group.open = group.getAttribute('data-hy-initial-open') === '1';
+        group.removeAttribute('data-hy-search-opened');
+      }
+    });
+
+    if (searchStatus) {
+      searchStatus.textContent = keyword
+        ? (resultCount ? resultCount + '개 항목 · 본문 ' + highlightCount + '곳 표시' : '검색 결과 없음')
+        : '';
+    }
+
+    refreshNavScroll();
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', setNavSearchResult);
+    searchInput.addEventListener('keydown', function (event) {
+      if (event.key !== 'Enter') return;
+      var firstVisibleLink = Array.prototype.slice.call(nav.querySelectorAll('a')).filter(function (link) {
+        return link.offsetParent !== null;
+      })[0];
+      if (firstVisibleLink) {
+        event.preventDefault();
+        firstVisibleLink.click();
+      }
+    });
+  }
+
+  /* 하위 메뉴 링크를 클릭하면 해당 details를 자동으로 펼침 */
+  var subLinks = Array.prototype.slice.call(root.querySelectorAll('.hy-nav-sub a'));
+  subLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      var target = root.querySelector(link.getAttribute('href'));
+      if (target && target.tagName.toLowerCase() === 'details') {
+        target.open = true;
+      }
+    });
+  });
+
+  /* URL 해시로 직접 접근한 경우에도 해당 details를 펼침 */
+  function openHashTarget() {
+    if (!window.location.hash) return;
+    var target = root.querySelector(window.location.hash);
+    if (target && target.tagName.toLowerCase() === 'details') {
+      target.open = true;
+    }
+  }
+  openHashTarget();
+  window.addEventListener('hashchange', openHashTarget);
+})();
+</script>
+
+</body>
+</html>
