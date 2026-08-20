@@ -13,8 +13,7 @@
 
 <style>
   /*
-    ERICA 계절학기 종합 안내
-    - 최신 완성형 안내문 HTML의 디자인 구조를 기준으로 작성
+    한양대학교 ERICA 수업 및 수강안내
     - 모든 스타일은 #hy-course-guide 내부로 한정
     - 학교 게시판의 다른 요소와 CSS 충돌을 최소화
   */
@@ -29,8 +28,8 @@
     --hy-muted: #637083;
     --hy-line: #dbe3ed;
     --hy-bg: #f5f7fa;
-    max-width: 1180px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     color: var(--hy-text);
     font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
     font-size: 16px;
@@ -46,29 +45,79 @@
   }
 
   #hy-course-guide .hy-hero {
-    padding: 36px 34px;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    padding: 0;
     color: #fff;
-    background: linear-gradient(135deg, var(--hy-blue-dark), var(--hy-blue));
+    background: var(--hy-blue);
     border-radius: 22px;
     box-shadow: 0 14px 38px rgba(7, 54, 111, .17);
+    overflow: hidden;
   }
-  #hy-course-guide .hy-eyebrow {
-    display: inline-flex; align-items: center; gap: 7px;
-    margin-bottom: 12px; padding: 5px 10px;
-    border: 1px solid rgba(255,255,255,.35); border-radius: 999px;
-    background: rgba(255,255,255,.1); font-size: 13px; font-weight: 700;
+  #hy-course-guide .hy-hero-brand-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 20px;
+    background: #fff;
+  }
+  #hy-course-guide .hy-hero-content-panel {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding: 24px 34px 22px;
+  }
+  #hy-course-guide .hy-brand-logo {
+    display: block;
+    width: 185px;
+    max-width: 100%;
+    height: auto;
+  }
+  #hy-course-guide .hy-hero-emblem {
+    display: block;
+    flex: 0 0 auto;
+    width: 90px;
+    height: auto;
+  }
+  #hy-course-guide .hy-hero-copy {
+    min-width: 0;
+    flex: 1;
+  }
+  #hy-course-guide .hy-hero-subrow {
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+  }
+  #hy-course-guide .hy-hero-subrow p {
+    flex: 1;
+  }
+  #hy-course-guide .hy-hero-meta {
+    flex: 0 0 auto;
+    margin-left: auto;
+    color: rgba(255,255,255,.9);
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
   }
   #hy-course-guide .hy-hero h1 {
     margin: 0;
     font-size: clamp(27px, 4vw, 42px);
     line-height: 1.25;
   }
+  #hy-course-guide .hy-hero-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
   #hy-course-guide .hy-hero p {
-    margin: 12px 0 0;
+    margin: 8px 0 0;
     color: rgba(255,255,255,.88);
   }
   #hy-course-guide .hy-actions {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0;
   }
   #hy-course-guide .hy-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 7px;
@@ -107,6 +156,7 @@
     margin-top: 22px;
   }
 
+  /* 좌측 내비게이터 */
   #hy-course-guide .hy-nav {
     position: sticky;
     top: 18px;
@@ -165,6 +215,33 @@
     color: var(--hy-muted);
     font-size: 11px;
     line-height: 1.35;
+  }
+  #hy-course-guide .hy-menu-grid {
+    display: grid;
+    gap: 8px;
+  }
+  #hy-course-guide .hy-nav-category {
+    margin: 0 0 8px;
+    padding: 4px;
+    border: 1px solid #e3ebf5;
+    border-radius: 12px;
+    background: #f8fbff;
+  }
+  #hy-course-guide .hy-nav-category > summary {
+    color: var(--hy-blue-dark);
+    border: 1px solid #edf2f7;
+    background: #fff;
+    font-weight: 850;
+  }
+  #hy-course-guide .hy-nav-category > .hy-nav-sub {
+    margin-left: 0;
+    padding-left: 8px;
+    border-left: 2px solid #c8dbf1;
+  }
+  #hy-course-guide .hy-nav-sub .hy-nav-group > summary {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 13px;
   }
   #hy-course-guide mark.hy-search-highlight {
     padding: 0 .08em;
@@ -238,7 +315,11 @@
     background: #f4f8fd;
   }
 
-  #hy-course-guide .hy-content { min-width: 0; }
+  #hy-course-guide .hy-content {
+    width: min(940px, 100%);
+    min-width: 0;
+    margin: 0 auto;
+  }
   #hy-course-guide .hy-section {
     scroll-margin-top: 20px;
     margin-bottom: 20px;
@@ -335,7 +416,22 @@
     border-left-color: var(--hy-orange);
     background: #fff7eb;
   }
+  #hy-course-guide .hy-notice-readable p {
+    margin: 0 0 8px;
+  }
+  #hy-course-guide .hy-notice-readable ol {
+    margin: 8px 0 0;
+    padding-left: 23px;
+  }
+  #hy-course-guide .hy-notice-readable li {
+    margin: 7px 0;
+  }
+  #hy-course-guide .hy-notice-readable .hy-note-subtitle {
+    margin-top: 10px;
+    font-weight: 800;
+  }
 
+  /* 본문 펼침 메뉴 */
   #hy-course-guide .hy-accordion {
     scroll-margin-top: 80px;
     margin: 10px 0;
@@ -466,6 +562,89 @@
   #hy-course-guide .hy-curriculum-current-end {
     border-bottom: 3px solid #202632 !important;
   }
+  #hy-course-guide .hy-attendance-table {
+    min-width: 1280px;
+  }
+  #hy-course-guide .hy-attendance-table th,
+  #hy-course-guide .hy-attendance-table td {
+    vertical-align: middle;
+  }
+  #hy-course-guide .hy-attendance-table .hy-policy-reason { width: 24%; }
+  #hy-course-guide .hy-attendance-table .hy-policy-period { width: 12%; }
+  #hy-course-guide .hy-attendance-table .hy-policy-mode { width: 9%; }
+  #hy-course-guide .hy-attendance-table .hy-policy-evidence { width: 21%; }
+  #hy-course-guide .hy-attendance-table .hy-policy-basis { width: 9%; }
+  #hy-course-guide .hy-policy-clauses p { margin: 0 0 10px !important; }
+  #hy-course-guide .hy-policy-form {
+    min-width: 0;
+    table-layout: fixed;
+  }
+  #hy-course-guide .hy-policy-form th,
+  #hy-course-guide .hy-policy-form td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  #hy-course-guide .hy-policy-form .hy-form-writing-area {
+    height: 130px;
+    text-align: left;
+    vertical-align: top;
+  }
+  #hy-course-guide .hy-policy-pdf {
+    margin-top: 18px;
+  }
+  #hy-course-guide .hy-policy-pdf .hy-doc-actions {
+    margin-bottom: 18px;
+  }
+  #hy-course-guide .hy-policy-pages {
+    display: grid;
+    gap: 18px;
+  }
+  #hy-course-guide .hy-policy-page {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--hy-line);
+    border-radius: 8px;
+    background: #fff;
+  }
+  #hy-course-guide .hy-policy-old-content { display: none; }
+  #hy-course-guide .hy-period-table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+  #hy-course-guide .hy-period-table th,
+  #hy-course-guide .hy-period-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  #hy-course-guide .hy-period-table th:nth-child(odd),
+  #hy-course-guide .hy-period-table td:nth-child(odd) { width: 8%; }
+  #hy-course-guide .hy-period-table th:nth-child(even),
+  #hy-course-guide .hy-period-table td:nth-child(even) { width: 17%; }
+  #hy-course-guide .hy-subsection-title {
+    margin: 24px 0 8px;
+    padding: 10px 12px;
+    border-left: 4px solid var(--hy-blue);
+    border-radius: 5px;
+    background: var(--hy-blue-soft);
+    color: var(--hy-blue-dark);
+  }
+  #hy-course-guide .hy-special-summary,
+  #hy-course-guide .hy-special-types {
+    min-width: 0;
+    table-layout: fixed;
+  }
+  #hy-course-guide .hy-special-summary th,
+  #hy-course-guide .hy-special-summary td,
+  #hy-course-guide .hy-special-types th,
+  #hy-course-guide .hy-special-types td {
+    vertical-align: top;
+  }
+  #hy-course-guide .hy-special-summary th:first-child,
+  #hy-course-guide .hy-special-summary td:first-child { width: 18%; }
+  #hy-course-guide .hy-special-summary th:nth-child(2),
+  #hy-course-guide .hy-special-summary td:nth-child(2) { width: 27%; }
   #hy-course-guide tr:last-child td { border-bottom: 0; }
 
   #hy-course-guide .hy-backtop {
@@ -480,8 +659,31 @@
   @media (max-width: 860px) {
     #hy-course-guide { word-break: normal; }
     #hy-course-guide .hy-hero {
-      padding: 27px 21px;
+      display: block;
       border-radius: 16px;
+    }
+    #hy-course-guide .hy-hero-brand-panel {
+      justify-content: flex-start;
+      padding: 16px 21px;
+    }
+    #hy-course-guide .hy-hero-content-panel {
+      display: block;
+      padding: 22px 21px 20px;
+    }
+    #hy-course-guide .hy-hero-meta {
+      margin: 8px 0 0;
+      text-align: right;
+    }
+    #hy-course-guide .hy-hero-subrow {
+      display: block;
+    }
+    #hy-course-guide .hy-brand-logo {
+      width: 165px;
+    }
+    #hy-course-guide .hy-hero-title-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 14px;
     }
     #hy-course-guide .hy-layout { display: block; }
     #hy-course-guide .hy-nav {
@@ -515,13 +717,23 @@
 
   <!-- 01. 상단 제목 및 빠른 이동 버튼 -->
   <header class="hy-hero">
-    <div class="hy-eyebrow">한양대학교 ERICA 교육혁신처 학사운영팀</div>
-    <h1>ERICA 계절학기 종합 안내</h1>
-    <p>계절학기 수강신청부터 등록, 수업, 취소·환불, 강의평가 및 성적처리까지 반드시 확인해야 할 사항을 안내합니다.</p>
-    <div class="hy-actions">
-      <a class="hy-btn hy-btn-primary" href="#hy-schedule">주요 일정 확인</a>
-      <a class="hy-btn hy-btn-ghost" href="#hy-application">수강신청 안내</a>
-      <a class="hy-btn hy-btn-ghost" href="#hy-refund">취소·환불 안내</a>
+    <div class="hy-hero-brand-panel">
+      <img class="hy-hero-emblem" src="HYU_logo_singlecolor 원형.png" alt="한양대학교 로고">
+      <img class="hy-brand-logo" src="HYU_logotype_ERICA_blue_kor_eng.png" alt="한양대학교 ERICA">
+    </div>
+    <div class="hy-hero-content-panel">
+      <div class="hy-hero-copy">
+        <div class="hy-hero-title-row">
+          <h1>ERICA 계절학기 종합 안내</h1>
+          <div class="hy-actions">
+            <a class="hy-btn hy-btn-primary" href="#hy-schedule">주요 일정 확인 ↗</a>
+          </div>
+        </div>
+        <div class="hy-hero-subrow">
+          <p>계절학기 수강신청부터 등록, 수업, 취소·환불, 강의평가 및 성적처리까지 반드시 확인해야 할 사항을 안내합니다.</p>
+          <div class="hy-hero-meta">교육혁신처 학사운영팀</div>
+        </div>
+      </div>
     </div>
   </header>
 
